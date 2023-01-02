@@ -60,7 +60,36 @@ module.exports = async (client, discord, member) => {
                 if (users[i][j].userId) {
                     const childRef = ref.child(databaseId)
 
-                    if (NEW_CHANNEL_ID !== PRIVATE.id && NEW_CHANNEL_ID !== DUO.id && NEW_CHANNEL_ID !== MAIN_STUDY.id || NEW_CHANNEL_ID !== MAIN_STUDY_2.id) {
+                    if (NEW_CHANNEL_ID !== MAIN_STUDY.id && NEW_CHANNEL_ID !== MAIN_STUDY_2.id) {
+
+                        if (PRIVATE) {
+                            if (NEW_CHANNEL_ID !== PRIVATE.id) {
+                                childRef.update({
+                                    voiceChannel: false
+                                })
+        
+                                return
+                            }
+
+                            childRef.update({
+                                voiceChannel: true
+                            })
+                        }
+    
+                        if (DUO) {
+                            if (NEW_CHANNEL_ID !== DUO.id) {
+                                childRef.update({
+                                    voiceChannel: false
+                                })
+        
+                                return
+                            }
+
+                            childRef.update({
+                                voiceChannel: true
+                            })
+                        }
+                        
                         childRef.update({
                             voiceChannel: false
                         })
