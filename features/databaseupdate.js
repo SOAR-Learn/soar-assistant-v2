@@ -8,6 +8,9 @@ module.exports = async (client, discord, member) => {
         const NEW_CHANNEL_ID = newState.channelId
         const OLD_CHANNEL_ID = oldState.channelId
         const { guild } = oldState
+
+        var member = newState.member
+        if (member.user.bot) return
         var displayName = guild.members.cache.get(member.id).displayName
     
         var PRIVATE_STUDY = guild.channels.cache.find(r => r.name === 'Private Study')
@@ -19,9 +22,6 @@ module.exports = async (client, discord, member) => {
         var DUO = guild.channels.cache.find(r => r.name === 'Duo Study: ' + displayName)
     
         if (!PRIVATE_STUDY || !DUO_STUDY || !MAIN_STUDY || !MAIN_STUDY_2) return
-        
-        var member = newState.member
-        if (member.user.bot) return
     
         var VOICE_CHANNEL = member.voice.channel
     
