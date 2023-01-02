@@ -74,6 +74,8 @@ module.exports = async (client, discord, member) => {
                             childRef.update({
                                 voiceChannel: true
                             })
+
+                            return
                         }
     
                         if (DUO) {
@@ -88,6 +90,8 @@ module.exports = async (client, discord, member) => {
                             childRef.update({
                                 voiceChannel: true
                             })
+
+                            return
                         }
                         
                         childRef.update({
