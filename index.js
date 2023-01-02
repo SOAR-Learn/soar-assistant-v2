@@ -11,9 +11,11 @@ const serviceAccount = require('./soar-portal-firebase-adminsdk-wmpt1-8da886742a
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://soar-portal-default-rtdb.firebaseio.com/'
-});
+})
 
-const udb = admin.database().ref("/users")
+const ref = admin.database().ref('/users')
+
+module.exports = { firebaseRef: ref }
 
 const { Client, Intents, MessageEmbed, Permissions } = DiscordJS
 
@@ -33,6 +35,8 @@ const client = new Client({ intents: [
     Intents.FLAGS.GUILD_VOICE_STATES,
     Intents.FLAGS.GUILD_WEBHOOKS
 ] })
+
+/* Start Bot */
 
 client.on('ready', () => {
     console.log('Bot online!')
@@ -60,6 +64,8 @@ client.on('ready', () => {
     .setDefaultPrefix('-')
 })
 
+/* Verification */
+
 client.on('messageCreate', async message => {
     if (message.author.bot) return
 
@@ -70,16 +76,15 @@ client.on('messageCreate', async message => {
 
     const channel = message.guild.channels.cache.find(c => c.name === 'verification')
     if (!channel) return
+    if (message.channel != channel) return
 
     const content = message.content
 
     const args = message.content.split(/ +/)
-    
-    if (message.channel != channel) return
 
     let users = []
     
-    udb.orderByChild('first').equalTo(args[0]).once('value', snapshot => {
+    ref.orderByChild('first').equalTo(args[0]).once('value', snapshot => {
         if (snapshot.exists()) {
             users.push(snapshot.exportVal())
         }
@@ -96,21 +101,21 @@ client.on('messageCreate', async message => {
                 message.member.setNickname(content)
             }, ms('1s'))
             setTimeout(function() {
-                console.log("Author ID: " + message.author.id);
+                console.log('Author ID: ' + message.author.id)
                 message.guild.members.cache.get(message.author.id).roles.add(student_role)
             }, ms('2s'))
             userFound = true
             break
         }}
     }
-    if (userFound !== true) {
-        console.log(`Failed Verification: ${message.author.tag}`)
-        
-        let verification_message = `The name you entered was not found in the SOAR Database. Please register as a member by visiting https://portal.soarlearn.org and try again.`
-        message.channel.send(verification_message)
-    }
+        if (userFound !== true) {
+            console.log(`Failed Verification: ${message.author.tag}`)
+            
+            let verification_message = `The name you entered was not found in the SOAR Database. Please register as a member by visiting https://portal.soarlearn.org and try again.`
+            message.channel.send(verification_message)
+        }
     })
-});
+})
 
 client.login(process.env.TOKEN)
 
