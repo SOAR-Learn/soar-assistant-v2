@@ -19,7 +19,8 @@ module.exports = async (client, discord, member) => {
 
         var PRIVATE_STUDY = guild.channels.cache.find(r => r.name === 'Private Study')
         var DUO_STUDY = guild.channels.cache.find(r => r.name === 'Duo Study')
-        var MAIN_STUDY = guild.channels.cache.find(r => r.name === 'Main Study')
+        var MAIN_STUDY = guild.channels.cache.find(r => r.name === 'Main Study 1')
+        var MAIN_STUDY_2 = guild.channels.cache.find(r => r.name === 'Main Study 2')
 
         var PRIVATE_USER_STUDY = guild.channels.cache.find(r => r.name === 'Private Study: ' + displayName)
         var DUO_USER_STUDY = guild.channels.cache.find(r => r.name === 'Duo Study: ' + displayName)
@@ -32,7 +33,7 @@ module.exports = async (client, discord, member) => {
             console.log(OLD_CHANNEL_ID)
         }
 
-        if (NEW_CHANNEL_ID === MAIN_STUDY.id) {
+        if (NEW_CHANNEL_ID === MAIN_STUDY.id || NEW_CHANNEL_ID === MAIN_STUDY_2.id) {
             console.log(displayName + ' has joined MAIN STUDY')
 
             if (PRIVATE_USER_STUDY) PRIVATE_USER_STUDY.delete()
