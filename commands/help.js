@@ -18,7 +18,7 @@ module.exports = {
         + '`suggest` - suggest a feature' + '\n'
         + '`report` - report a problem' + '\n'
         + '`search` - search our resources' + '\n'
-        + '`pomodoro` - create or manage a study channel' + '\n'
+        + '`profile` - check study profile' + '\n'
         + '`resources` - useful third-party resources' + '\n')
         .setTimestamp()
 

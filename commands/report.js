@@ -18,7 +18,7 @@ module.exports = {
             return
         }
 
-        let staff = client.users.cache.find(t => t.id === "756269875961266227")
+        let staff = client.users.cache.find(t => t.id === '756269875961266227')
 
         staff.send({
             content: `Report from ${interaction.user.id}: ${args}`,
