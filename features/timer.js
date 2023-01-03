@@ -9,11 +9,18 @@ module.exports = async (client, discord, member) => {
               const childRef = childSnapshot.ref
               const childData = childSnapshot.val()
 
+              let add = Math.random() * 4 + 1
+              console.log(add)
+
               let time = childData.studyTime + 1
               console.log(time)
 
               childRef.update({
                 studyTime: time
+              })
+
+              childRef.update({
+                currency: add
               })
             })
           })
