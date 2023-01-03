@@ -9,7 +9,7 @@ module.exports = async (client, discord, member) => {
               const childRef = childSnapshot.ref
               const childData = childSnapshot.val()
 
-              let add = (childData.currency + Math.random() * 4 + 1).toFixed(0)
+              let add = (childData.currency + Math.random() * 4 + 1)
 
               let time = childData.studyTime + 1
 
@@ -18,7 +18,7 @@ module.exports = async (client, discord, member) => {
               })
 
               childRef.update({
-                currency: add
+                currency: Math.round(add)
               })
             })
           })
