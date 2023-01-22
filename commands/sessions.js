@@ -20,8 +20,21 @@ module.exports = {
                         list.push(`\n${childData.date} - ${childData.subject} - ${childData.time}`)
                     }
                 })
+
+                if (list == []) return interaction.reply({
+                    content: 'There are no sessions scheduled.'
+                })
+
+                const embed = new MessageEmbed()
+                .setColor('#ADD8E6')
+                .setAuthor('soar assistant v2')
+                .setDescription(
+                    `${list}`
+                )
+                .setTimestamp()
+
                 interaction.reply({
-                    content: `**SESSIONS**${list}`
+                    embeds: [embed]
                 })
                 return
             })
