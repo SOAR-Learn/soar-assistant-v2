@@ -17,6 +17,10 @@ const ref = admin.database().ref('/users')
 
 module.exports = { firebaseRef: ref }
 
+const sessionRef = admin.database().ref('/sessions')
+
+module.exports = { sessionRef: sessionRef }
+
 const { Client, Intents, MessageEmbed, Permissions } = DiscordJS
 
 const client = new Client({ intents: [
