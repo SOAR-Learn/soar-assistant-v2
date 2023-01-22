@@ -13,6 +13,8 @@ module.exports = {
         .setAuthor('soar assistant v2')
         .setDescription(
         '`help` - shows this message' + '\n'
+        + '`add` - add study sessions to the calendar' + '\n'
+        + '`sessions` - show session schedule' + '\n'
         + '`prefix` - shows bot prefix' + '\n'
         + '`invite` - invite people to the server' + '\n'
         + '`suggest` - suggest a feature' + '\n'
